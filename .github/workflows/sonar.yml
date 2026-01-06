@@ -4,6 +4,10 @@ on:
   push:
     branches: [ master ]
 
+  pull_request:
+    branches: [ master ] # Chạy khi có PR trỏ vào master
+    types: [opened, synchronize, reopened]
+
 jobs:
   build:
     runs-on: self-hosted  # QUAN TRỌNG: Chỉ định chạy trên máy local của bạn
