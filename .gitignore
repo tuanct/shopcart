@@ -1,14 +1,43 @@
-sourcecode/node_modules
-sourcecode/public/hot
-sourcecode/public/storage
-sourcecode/storage/*.key
-sourcecode/vendor/*
-sourcecode/.idea
-sourcecode/.vagrant
-sourcecode/Homestead.json
-sourcecode/Homestead.yaml
-sourcecode/npm-debug.log
-sourcecode/.env
-sourcecode/composer.lock
-/nbproject/private/
-/.idea
+# Dependency directories (Cực kỳ quan trọng, không bao giờ push thư mục này)
+node_modules/
+jspm_packages/
+
+# Build outputs
+dist/
+build/
+out/
+
+# Debug logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+logs/
+*.log
+
+# Environment variables (Chứa thông tin bảo mật, tuyệt đối không push)
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# SonarQube & Coverage (Các file sinh ra khi chạy test và quét Sonar)
+.scannerwork/
+coverage/
+*.lcov
+
+# OS Metadata (Các file rác của hệ điều hành)
+.DS_Store
+Thumbs.db
+
+# IDEs and editors (Cấu hình riêng của trình soạn thảo)
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Optional: Lock files (Thường thì nên giữ lại để đồng bộ version, 
+# nhưng nếu bạn muốn bỏ thì bỏ comment bên dưới)
+# package-lock.json
+# yarn.lock
+actions-runner/
