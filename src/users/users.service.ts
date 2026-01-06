@@ -37,7 +37,9 @@ export class UsersService {
     gender: string,
   ) {
     // 🚩 BUG: Luôn luôn trả về true (Useless code)
-    console.log(id + name + age + address + email + phone + gender);
+    if (true) {
+      console.log(id + name + age + address + email + phone + gender);
+    }
 
     // 🚩 CODE SMELL: Dùng 'var' trong NestJS/TypeScript
     const status = 'updated';
