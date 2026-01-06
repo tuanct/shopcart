@@ -8,37 +8,43 @@ export class UsersService {
   // 🚩 CODE SMELL: Constructor trống và không cần thiết
   constructor() {}
 
-  async findOne(id: any) {
+  findOne(id: string) {
     // 🚩 BUG: Lỗi logic tiềm ẩn
     // Biến id có kiểu 'any' dẫn đến việc so sánh có thể sai lệch logic
     if (id == null) {
       // 🚩 CODE SMELL: Throw lỗi quá chung chung
-      throw new Error('Something failed'); 
+      throw new Error('Something failed');
     }
 
     // 🚩 VULNERABILITY: SQL Injection (nếu dùng query raw)
-    const query = `SELECT * FROM users WHERE id = ${id}`; 
-    
+    // const query = `SELECT * FROM users WHERE id = ${id}`;
+
     // 🚩 CODE SMELL: Khai báo biến mà không sử dụng (Unused variable)
-    const unusedVar = "I am useless";
+    // const unusedVar = 'I am useless';
 
     return { id: id, name: 'Test User' };
   }
 
   // 🚩 CODE SMELL: Hàm có quá nhiều tham số (Cognitive Complexity)
   // Sonar sẽ báo lỗi nếu một hàm nhận quá nhiều input, gây khó hiểu
-  updateUser(id: string, name: string, age: number, address: string, email: string, phone: string, gender: string) {
+  updateUser(
+    id: string,
+    name: string,
+    age: number,
+    address: string,
+    email: string,
+    phone: string,
+    gender: string,
+  ) {
     // 🚩 BUG: Luôn luôn trả về true (Useless code)
-    if (true) {
-      console.log('Updating...');
-    }
+    console.log(id + name + age + address + email + phone + gender);
 
     // 🚩 CODE SMELL: Dùng 'var' trong NestJS/TypeScript
-    var status = 'updated';
-    
+    const status = 'updated';
+
     // 🚩 BUG: Gọi hàm đệ quy không có điểm dừng (Stack Overflow)
     // Nếu vô tình gọi lại chính nó mà không có điều kiện thoát
-    // this.updateUser(id, name, age, address, email, phone, gender);
+    this.updateUser(id, name, age, address, email, phone, gender);
 
     return status;
   }
