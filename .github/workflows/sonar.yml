@@ -20,6 +20,9 @@ jobs:
       - name: Lint Code (ESLint & TypeScript)
         run: npm run lint
 
+      - name: Run test
+        run: npm run test --coverage
+
       - name: Type Check (Build)
         run: npm run build
         continue-on-error: true
