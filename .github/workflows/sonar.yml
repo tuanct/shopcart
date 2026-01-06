@@ -1,31 +1,38 @@
-name: SonarQube Analysis
+name: SonarQube Analysis (TypeScript)
 
 on:
   push:
-    branches: [ master ]
-
+    branches: [ master, main ]
   pull_request:
-    branches: [ master ] # Chạy khi có PR trỏ vào master
     types: [opened, synchronize, reopened]
 
 jobs:
-  build:
-    runs-on: self-hosted  # QUAN TRỌNG: Chỉ định chạy trên máy local của bạn
-
+  sonarqube:
+    runs-on: self-hosted
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Install Dependencies
+      - name: Install dependencies
         run: npm install
 
-      # (Tùy chọn) Chạy test để lấy báo cáo độ phủ code (coverage)
-      - name: Run Test
-        run: npm test -- --coverage 
+      - name: Check Format (Prettier)
+        run: npm run check-format
+
+      - name: Lint Code (ESLint & TypeScript)
+        run: npm run lint
+
+      - name: Type Check (Build)
+        run: npm run build
 
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@master
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+        with:
+          args: >
+            -Dsonar.projectKey=nodejs-app-local
+            -Dsonar.sources=.
+            -Dsonar.typescript.tsconfigPath=tsconfig.json
